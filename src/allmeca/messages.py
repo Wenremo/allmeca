@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from enum import Enum
 from langchain.schema import AIMessage, HumanMessage, SystemMessage, ChatMessage
+from pathlib import Path
 
 
 class Role(str, Enum):
@@ -44,3 +45,37 @@ class MessageList(BaseModel):
 
     def __iter__(self):
         return iter(self.messages)
+
+    def is_empty(self):
+        return len(self.messages) == 0
+
+
+class Persistence:
+    def save(self, message_list: MessageList):
+        raise NotImplementedError
+
+    def load(self) -> MessageList:
+        raise NotImplementedError
+
+
+class NullPersistence(Persistence):
+    def save(self, message_list: MessageList):
+        pass
+
+    def load(self) -> MessageList:
+        return MessageList()
+
+
+class FilePersistence(Persistence):
+    def __init__(self, path: str | Path):
+        self.path = Path(path)
+
+    def save(self, message_list: MessageList):
+        with self.path.open("w") as f:
+            f.write(message_list.json())
+
+    def load(self) -> MessageList:
+        if not self.path.exists():
+            return MessageList()
+        with self.path.open("r") as f:
+            return MessageList.parse_raw(f.read())

@@ -1,3 +1,4 @@
+from typing import Optional
 from pathlib import Path
 import yaml
 from pydantic import BaseModel
@@ -8,7 +9,7 @@ propts_dir = Path(__file__).parent.parent.parent / "prompts"
 
 class PromptSet(BaseModel):
     init: MessageList
-    stop_words: list[str] = []
+    stop_words: Optional[list[str]] = None
 
 
 def load_prompt_set(name):

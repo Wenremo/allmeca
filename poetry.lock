@@ -533,7 +533,6 @@ files = [
     {file = "debugpy-1.6.6-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9b5d1b13d7c7bf5d7cf700e33c0b8ddb7baf030fcf502f76fc061ddd9405d16c"},
     {file = "debugpy-1.6.6-cp38-cp38-win32.whl", hash = "sha256:70ab53918fd907a3ade01909b3ed783287ede362c80c75f41e79596d5ccacd32"},
     {file = "debugpy-1.6.6-cp38-cp38-win_amd64.whl", hash = "sha256:c05349890804d846eca32ce0623ab66c06f8800db881af7a876dc073ac1c2225"},
-    {file = "debugpy-1.6.6-cp39-cp39-macosx_11_0_x86_64.whl", hash = "sha256:11a0f3a106f69901e4a9a5683ce943a7a5605696024134b522aa1bfda25b5fec"},
     {file = "debugpy-1.6.6-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a771739902b1ae22a120dbbb6bd91b2cae6696c0e318b5007c5348519a4211c6"},
     {file = "debugpy-1.6.6-cp39-cp39-win32.whl", hash = "sha256:549ae0cb2d34fc09d1675f9b01942499751d174381b6082279cf19cdb3c47cbe"},
     {file = "debugpy-1.6.6-cp39-cp39-win_amd64.whl", hash = "sha256:de4a045fbf388e120bb6ec66501458d3134f4729faed26ff95de52a754abddb1"},
@@ -1428,6 +1427,41 @@ files = [
 plugins = ["importlib-metadata"]
 
 [[package]]
+name = "python-box"
+version = "7.0.1"
+description = "Advanced Python dictionaries with dot notation access"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "python-box-7.0.1.tar.gz", hash = "sha256:dc6724f88255ccbc07092abd506281439cc2b75c6569c754ffc2b22580e7ae06"},
+    {file = "python_box-7.0.1-cp310-cp310-macosx_11_0_x86_64.whl", hash = "sha256:92093bf5b1500004e3608b3f39e54230b21301ffb00ff5f4dbf775f2a409a7a9"},
+    {file = "python_box-7.0.1-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:cccb85f9cbf64eda51c773f3db68aa60291ec1356b0774c37bcd4e13f26b90e7"},
+    {file = "python_box-7.0.1-cp310-cp310-win_amd64.whl", hash = "sha256:f394cca98c777b25836faf25cb5afdc88c01dc753a5aab80055a038229091b7b"},
+    {file = "python_box-7.0.1-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:86182565c9ebe9ee4a3aece1a55d9d5451c6a44b5ec127a5e4d315909efe6d10"},
+    {file = "python_box-7.0.1-cp311-cp311-win_amd64.whl", hash = "sha256:33d61b81133d1ddf6d85d0658c4c9aca871208c28df74e660dbdfe68f9b470ce"},
+    {file = "python_box-7.0.1-cp37-cp37m-macosx_10_15_x86_64.whl", hash = "sha256:042d10f33e56a3b3432a94a23c90672a7f32f6de7116cdd9bc59d852ca08f5f7"},
+    {file = "python_box-7.0.1-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:6a6d71c3c2ebed3f4c888edfa96bc5768f5e7641c4b0b6017d70f68a325811cf"},
+    {file = "python_box-7.0.1-cp37-cp37m-win_amd64.whl", hash = "sha256:dc135cf06ef3dde501de9baab21d908088fb03e2de09e3fe80e8a4f1dcd1ab2b"},
+    {file = "python_box-7.0.1-cp38-cp38-macosx_10_15_x86_64.whl", hash = "sha256:443ff7320c1b7e64384189f532c386600a6c31db9ddd9ded8ecc3ad4c43d0edb"},
+    {file = "python_box-7.0.1-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:6b8265e842eee33dd5d1b129b8da900ec0b6f80db70680b633f9086807f42fb9"},
+    {file = "python_box-7.0.1-cp38-cp38-win_amd64.whl", hash = "sha256:fbb14fac0ff0b2b42e47041b7b8b4f1f8d6f6ac086c8e68b7f0358602905653e"},
+    {file = "python_box-7.0.1-cp39-cp39-macosx_11_0_x86_64.whl", hash = "sha256:84867f6527bbd1d17bc7534e1c64ccd1d173d973ae5eb202f04bdf8c0ca3a690"},
+    {file = "python_box-7.0.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:4e35521b9b96cf6a18ecfef7ebcf73fe326956a7b5d789c4ff0a01dc43edd6ce"},
+    {file = "python_box-7.0.1-cp39-cp39-win_amd64.whl", hash = "sha256:f9254a1c7ec5e729e256f9a223773aa8a76d7a995f4d6be0015f74ab93a0f97c"},
+    {file = "python_box-7.0.1-py3-none-any.whl", hash = "sha256:f26f210b2257fd973413e75e8b91aaff9c95d7d61266426a7d3df473c4adcfd4"},
+]
+
+[package.extras]
+all = ["msgpack", "ruamel.yaml (>=0.17)", "toml"]
+msgpack = ["msgpack"]
+pyyaml = ["PyYAML"]
+ruamel-yaml = ["ruamel.yaml (>=0.17)"]
+toml = ["toml"]
+tomli = ["tomli", "tomli-w"]
+yaml = ["ruamel.yaml (>=0.17)"]
+
+[[package]]
 name = "python-dateutil"
 version = "2.8.2"
 description = "Extensions to the standard Python datetime module"
@@ -1917,6 +1951,24 @@ pure-eval = "*"
 tests = ["cython", "littleutils", "pygments", "pytest", "typeguard"]
 
 [[package]]
+name = "structlog"
+version = "22.3.0"
+description = "Structured Logging for Python"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "structlog-22.3.0-py3-none-any.whl", hash = "sha256:b403f344f902b220648fa9f286a23c0cc5439a5844d271fec40562dbadbc70ad"},
+    {file = "structlog-22.3.0.tar.gz", hash = "sha256:e7509391f215e4afb88b1b80fa3ea074be57a5a17d794bd436a5c949da023333"},
+]
+
+[package.extras]
+dev = ["structlog[docs,tests,typing]"]
+docs = ["furo", "myst-parser", "sphinx", "sphinx-notfound-page", "sphinxcontrib-mermaid", "twisted"]
+tests = ["coverage[toml]", "freezegun (>=0.2.8)", "pretend", "pytest (>=6.0)", "pytest-asyncio (>=0.17)", "simplejson"]
+typing = ["mypy", "rich", "twisted"]
+
+[[package]]
 name = "tenacity"
 version = "8.2.2"
 description = "Retry code until it succeeds"
@@ -2273,4 +2325,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "804afa5a31ca04f09dd3630d67efb5eb5b7eec7f4b7d8f282c30e62e1673c7cb"
+content-hash = "b8d6c1c2271f6881dd86fdd147e5e2d9af2efc7641edc6e0dadbf48062ee6d70"

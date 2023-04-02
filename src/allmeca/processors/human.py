@@ -1,8 +1,7 @@
 import click
 
-
-class Processor:
-    pass
+from allmeca.processors.base import Processor
+from allmeca.processors import reactions
 
 
 class HumanProcessor(Processor):
@@ -11,8 +10,11 @@ class HumanProcessor(Processor):
         click.echo(msg.content)
         click.echo("\n")
         click.echo("Paste the response to the bot, or type /exit to stop")
-        response = click.edit().strip()
+        response = click.edit()
+        if response is None:
+            return reactions.Noop()
+        response = response.strip()
         if response == "/exit":
-            exit(0)
+            return reactions.Stop()
         else:
-            return response
+            return reactions.Response(response)
