@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "allmeca"
+version = "0.1.0"
+description = ""
+authors = ["Max Hollmann <maxhollmann@gmail.com>"]
+
+packages = [
+    { include = "allmeca", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+langchain = "^0.0.129"
+openai = "^0.27.2"
+click = "^8.1.3"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.group.dev.dependencies]
+python-lsp-server = {extras = ["rope"], version = "^1.7.1"}
+black = "^23.1.0"
+ptpython = "^3.0.23"
+pprintpp = "^0.4.0"
+pp-ez = "^0.2.0"
+termcolor = "^2.2.0"
+ipykernel = "^6.21.3"
+better-exceptions = "^0.3.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+allmeca = 'allmeca.cli:main'
