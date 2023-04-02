@@ -27,5 +27,5 @@ class MainBot:
         self._history.add(Message(role=Role.human, content=response))
 
     def _get_response(self):
-        msg = self._chat(self._history.to_langchain(), stop=["/execute"])
+        msg = self._chat(self._history.to_langchain(), stop=self.prompt_set.stop_words)
         return Message.from_langchain(msg)

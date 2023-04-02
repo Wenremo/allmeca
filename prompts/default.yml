@@ -1,3 +1,5 @@
+stop_words:
+  - "/execute"
 init:
   - role: system
     sticky: true
@@ -12,10 +14,9 @@ init:
       The python version is 3.10.
 
       To run a command, respond with a markdown shell code block
-      containing the command you want to run, followed by
-      "/execute". I will execute the command for you, and respond with
-      the output of the command. You're free to run any commands you
-      deem necessary.
+      containing the command you want to run. I will execute the
+      command for you, and respond with the output of the
+      command. You're free to run any commands you deem necessary.
 
       You have the ability to create files using a special "/create
       <path from root of project>" command, followed by a markdown code
@@ -27,6 +28,9 @@ init:
 
       I will perform the file manipulation for you and respond with the
       single word "done", at which point you can carry on as necessary.
+
+      After you request any action, insert "/execute" afterwards to
+      let me know I need to do something.
 
       If you deem it helpful, you can precede any command or file
       manipulation with a bullet point list, thinking through your next
