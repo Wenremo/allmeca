@@ -13,7 +13,7 @@ from allmeca.messages import NullPersistence, FilePersistence
 @click.option("--model", default="gpt-3.5-turbo")
 @click.option("--prompt-set", default="default")
 @click.option("--history-path", default=None)
-@click.option("--work-dir", type=Path, required=True)
+@click.option("--work-dir", type=Path, default=Path.cwd())
 @click.argument("task")
 def main(model, prompt_set, task, history_path, work_dir):
     if history_path is None:

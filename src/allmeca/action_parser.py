@@ -63,8 +63,14 @@ class ActionParser:
                 log.debug("input_found", input_name=input_name, value=value)
 
         context = msg[start_pos:end_pos]
-        action = self.available_actions[action_name](context, inputs, errors=errors)
-        log.debug("action_created", action=action.summary(), errors=action.errors)
+
+        if action_name in self.available_actions:
+            action = self.available_actions[action_name](context, inputs, errors=errors)
+            log.info("action_created", action=action.summary(), errors=action.errors)
+        else:
+            log.error("invalid_action_requested", action_name=action_name)
+            return
+
         return action, end_pos
 
 

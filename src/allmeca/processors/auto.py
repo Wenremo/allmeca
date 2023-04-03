@@ -4,6 +4,7 @@ from allmeca.processors.base import Processor
 from allmeca.processors import reactions
 from allmeca import actions
 from allmeca.action_parser import ActionParser
+from allmeca.user_interaction import prompt_choice, prompt_line
 
 
 class AutoProcessor(Processor):
@@ -14,7 +15,27 @@ class AutoProcessor(Processor):
 
     def process(self, msg):
         actions = self.extract_actions(msg)
-        # TODO: handle no actions
+        if len(actions) == 0:
+            yield from self.process_no_actions(msg)
+        else:
+            yield from self.process_actions(actions)
+
+    def process_no_actions(self, msg):
+        reply = prompt_choice(
+            "No actions found in message. Continue?",
+            y="yes",
+            n="no",
+            o="Give a new objective",
+        )
+        if reply == "y":
+            yield reactions.Noop()
+        elif reply == "o":
+            objective = prompt_line("New objective")
+            yield reactions.Response(f"Your new objective is: {objective}")
+        else:
+            yield reactions.Stop()
+
+    def process_actions(self, actions):
         for action in actions:
             if action.is_valid():
                 if self.confirm_actions:

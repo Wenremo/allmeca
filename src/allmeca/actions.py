@@ -89,7 +89,11 @@ class RunBash(Action):
     ]
 
     def perform(self, environment):
-        return environment.run_bash(self.inputs.command)
+        head = f"$ {self.inputs.command}\n"
+        cmd_out = environment.run_bash(self.inputs.command)
+        if len(cmd_out) > 15000:
+            cmd_out = cmd_out[:15000] + "\n\n(output truncated)"
+        return head + cmd_out
 
 
 class CreateFile(Action):
