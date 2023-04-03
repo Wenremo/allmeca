@@ -39,16 +39,25 @@ class AutoProcessor(Processor):
         for action in actions:
             if action.is_valid():
                 if self.confirm_actions:
-                    reply = ""
-                    while reply not in ["y", "n"]:
-                        reply = click.prompt(
-                            f"Perform action: {action.summary()}? [y/n/?]"
-                        ).lower()
-                        if reply == "?":
+                    while True:
+                        choice = prompt_choice(
+                            f"Perform action: {action.summary()}?",
+                            y="yes",
+                            n="no",
+                            s="show full action",
+                            c="show full action action",
+                        )
+                        if choice == "s":
                             click.echo("The full action is:\n")
                             click.echo(str(action))
                             click.echo()
-                    if reply == "n":
+                        elif choice == "c":
+                            click.echo("The full context is:\n")
+                            click.echo(action.context)
+                            click.echo()
+                        else:
+                            break
+                    if choice == "n":
                         yield reactions.Response(
                             f"Action not allowed by user: {action.summary()}"
                         )
