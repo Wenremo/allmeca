@@ -7,15 +7,25 @@ from allmeca.processors.auto import AutoProcessor
 from allmeca import environments
 from allmeca.prompts import load_prompt_set
 from allmeca.messages import NullPersistence, FilePersistence
+from allmeca.user_interaction import prompt_line
 
 
 @click.command()
-@click.option("--model", default="gpt-3.5-turbo")
-@click.option("--prompt-set", default="default")
-@click.option("--history-path", default=None)
-@click.option("--work-dir", type=Path, default=Path.cwd())
-@click.argument("task")
-def main(model, prompt_set, task, history_path, work_dir):
+@click.option("-m", "--model", default="gpt-3.5-turbo")
+@click.option("-p", "--prompt-set", default="default")
+@click.option("-h", "--history-path", default=None)
+@click.option("-w", "--work-dir", type=Path, default=Path.cwd())
+@click.option("-t", "--task-file", type=click.File("r"), default=None)
+@click.argument("task", nargs=-1)
+def main(model, prompt_set, task, task_file, history_path, work_dir):
+    if task_file is not None:
+        task = task_file.read()
+        task_file.close()
+    elif len(task) == 0:
+        task = prompt_line("How can I help you?")
+    else:
+        task = " ".join(task)
+
     if history_path is None:
         persistence = NullPersistence()
     else:

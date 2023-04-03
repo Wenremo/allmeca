@@ -16,10 +16,10 @@ class TokenStreamCallbackHandler(NonabstractBaseCallbackHandler):
 # Workaround until https://github.com/hwchase17/langchain/pull/1924 is fixed
 class CountTokensCallbackHandler(NonabstractBaseCallbackHandler):
     def __init__(self):
-        self.tokens = 0
+        self.completion_tokens = 0
 
     def on_llm_new_token(self, token: str, **kwargs) -> None:
-        self.tokens += 1
+        self.completion_tokens += 1
 
 
 class OpenAIChat:
@@ -50,7 +50,7 @@ class OpenAIChat:
             click.echo("\n")
         log.debug(
             "openai_info",
-            total_tokens=self._count_tokens.tokens,
+            completion_tokens=self._count_tokens.completion_tokens,
             # total_cost=self.total_cost,
             # total_tokens=self._openai_info.total_tokens,
             # prompt_tokens=self._openai_info.prompt_tokens,
