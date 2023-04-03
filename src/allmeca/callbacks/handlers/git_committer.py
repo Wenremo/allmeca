@@ -1,6 +1,6 @@
 from git import Repo, Actor
 from textwrap import dedent
-from allmeca.user_interaction import info, prompt_yesno
+from allmeca import ui
 
 from allmeca.logger import log
 
@@ -18,14 +18,14 @@ class GitCommitter:
         self.branch = self.repo.create_head(self._find_branch_name())
         self.branch.checkout()
         log.info("created_branch", branch=self.branch.name)
-        info(f"Created branch {self.branch.name} for this run.")
+        ui.info(f"Created branch {self.branch.name} for this run.")
 
     def on_action_performed(self, action, output):
         self._commit_all(action, output)
 
     def on_run_complete(self):
-        info(f"All changes have been committed to {self.branch.name}.")
-        if prompt_yesno(f"Want me to switch back to {self.branch_before.name}?"):
+        ui.info(f"All changes have been committed to {self.branch.name}.")
+        if ui.prompt_yesno(f"Want me to switch back to {self.branch_before.name}?"):
             self.branch_before.checkout()
             log.info("switched_back_to_branch", branch=self.branch_before.name)
 

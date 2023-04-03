@@ -7,7 +7,7 @@ from allmeca.processors.auto import AutoProcessor
 from allmeca import environments
 from allmeca.prompts import load_prompt_set
 from allmeca.messages import NullPersistence, FilePersistence
-from allmeca.user_interaction import prompt_line
+from allmeca import ui
 from allmeca.run_context import RunContext
 
 
@@ -24,7 +24,7 @@ def main(model, prompt_set, task, task_file, history_path, work_dir, git):
         task = task_file.read()
         task_file.close()
     elif len(task) == 0:
-        task = prompt_line("How can I help you?")
+        task = ui.prompt_line("How can I help you?")
     else:
         task = " ".join(task)
 
