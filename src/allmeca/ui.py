@@ -14,6 +14,10 @@ def prompt_style(s):
 
 
 def prompt_format(s):
+    # TODO: don't print emoji unless stdout is a tty
+    # see should_strip_ansi here:
+    # https://github.com/pallets/click/blob/ef11be6e49e19a055fe7e5a89f0f1f4062c68dba/src/click/_compat.py
+    # https://github.com/pallets/click/blob/ef11be6e49e19a055fe7e5a89f0f1f4062c68dba/src/click/utils.py
     return emojize(":red_question_mark: ") + prompt_style(s)
 
 

@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from box import Box
-from inspect import cleandoc
+from textwrap import dedent
 
 
 class InputDecl(BaseModel):
@@ -33,7 +33,7 @@ class Action:
         return f"{self.command} {self._inputs_summary()}"
 
     def __str__(self):
-        return cleandoc(
+        return dedent(
             """
             ACTION: {command}{inputs}
             ENDACTION

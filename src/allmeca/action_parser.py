@@ -76,10 +76,10 @@ class ActionParser:
 
 
 if __name__ == "__main__":
-    from inspect import cleandoc
+    from textwrap import dedent
     from allmeca import actions
 
-    msg = cleandoc(
+    msg = dedent(
         """
         ALLMECA THOUGHTS: I need to write a Python script that can get URLs from DuckDuckGo search results.
         REASONING: I'll need to automate web interactions with Python, so I should use a popular library such as requests or selenium. I can then write code to parse the HTML of the DuckDuckGo search results and extract the URLs.
