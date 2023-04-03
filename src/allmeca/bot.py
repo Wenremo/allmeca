@@ -2,6 +2,7 @@ from langchain.chat_models import ChatOpenAI
 
 from allmeca.messages import Message, MessageList, Role
 from allmeca.processors import reactions
+from allmeca.logger import log
 
 
 class MainBot:
@@ -17,18 +18,23 @@ class MainBot:
         self._processor = processor
 
     def run(self, task):
+        log.info("bot_started", task=task)
         content = f"This is your objective: {task}"
         self._history.add(Message(role=Role.system, content=content))
         while not self._stop:
             self.act()
-        print("Bye!")
+        log.info("bot_stopped")
 
     def act(self):
         print("Thinking...")
         msg = self._get_completion()
         self._history.add(msg)
-        reaction = self._processor.process(msg)
+        for reaction in self._processor.process(msg):
+            self._process_reaction(reaction)
+
+    def _process_reaction(self, reaction):
         if isinstance(reaction, reactions.Response):
+            log.info("bot_response", response=reaction.response)
             self._history.add(Message(role=Role.system, content=reaction.response))
         elif isinstance(reaction, reactions.Stop):
             self._stop = True

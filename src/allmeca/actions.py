@@ -89,7 +89,7 @@ class RunBash(Action):
     ]
 
     def perform(self, environment):
-        output = environment.run_bash(self.inputs.command)
+        return environment.run_bash(self.inputs.command)
 
 
 class CreateFile(Action):
@@ -105,7 +105,8 @@ class CreateFile(Action):
     ]
 
     def perform(self, environment):
-        environment.write_file(self.inputs.path, self.inputs.content)
+        environment.write_file(self.inputs.path, self.inputs.contents)
+        return f"Created file {self.inputs.path}"
 
 
 all = dict(
