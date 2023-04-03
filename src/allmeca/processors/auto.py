@@ -63,7 +63,11 @@ class AutoProcessor(Processor):
                         )
                         continue
 
+                self._ctx.callbacks.emit("before_action", action=action)
                 output = action.perform(self.environment)
+                self._ctx.callbacks.emit(
+                    "action_performed", action=action, output=output
+                )
                 yield reactions.Response(output)
             else:
                 output = ["Invalid action: {}".format(action.summary())]

@@ -8,6 +8,7 @@ from allmeca import environments
 from allmeca.prompts import load_prompt_set
 from allmeca.messages import NullPersistence, FilePersistence
 from allmeca.user_interaction import prompt_line
+from allmeca.run_context import RunContext
 
 
 @click.command()
@@ -16,8 +17,9 @@ from allmeca.user_interaction import prompt_line
 @click.option("-h", "--history-path", default=None)
 @click.option("-w", "--work-dir", type=Path, default=Path.cwd())
 @click.option("-t", "--task-file", type=click.File("r"), default=None)
+@click.option("-g", "--git", is_flag=True, default=False)
 @click.argument("task", nargs=-1)
-def main(model, prompt_set, task, task_file, history_path, work_dir):
+def main(model, prompt_set, task, task_file, history_path, work_dir, git):
     if task_file is not None:
         task = task_file.read()
         task_file.close()
@@ -34,10 +36,29 @@ def main(model, prompt_set, task, task_file, history_path, work_dir):
     environment = environments.LocalEnvironment(work_dir=work_dir)
     processor = AutoProcessor(environment=environment)
     prompt_set = load_prompt_set(prompt_set)
+
     bot = MainBot(
-        processor=processor, model=model, prompt_set=prompt_set, persistence=persistence
+        processor=processor,
+        model=model,
+        prompt_set=prompt_set,
+        persistence=persistence,
     )
+
+    context = RunContext(
+        main_bot=bot,
+        environment=environment,
+        processor=processor,
+    )
+    context.inject_self()
+
+    if git:
+        from allmeca.callbacks.handlers.git_committer import GitCommitter
+
+        context.callbacks.register(GitCommitter(work_dir))
+
+    context.callbacks.emit("before_run_start")
     bot.run(task)
+    context.callbacks.emit("run_complete")
 
 
 if __name__ == "__main__":

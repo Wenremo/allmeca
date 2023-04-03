@@ -5,11 +5,11 @@ from allmeca.models.openai import OpenAIChat
 
 
 class MainBot:
-    def __init__(self, *, prompt_set, processor, persistence, model="gpt-3.5-turbo"):
-        self._persistence = persistence
-        self._history = persistence.load()
+    def __init__(self, *, persistence, prompt_set, processor, model="gpt-3.5-turbo"):
         self._model = OpenAIChat(model=model, temperature=0)
         self._prompt_set = prompt_set
+        self._persistence = persistence
+        self._history = persistence.load()
         if self._history.is_empty():
             self._history.add_many(self._prompt_set.init)
             self._persist()
