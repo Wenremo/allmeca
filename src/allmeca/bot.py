@@ -1,15 +1,14 @@
-from langchain.chat_models import ChatOpenAI
-
 from allmeca.messages import Message, MessageList, Role
 from allmeca.processors import reactions
 from allmeca.logger import log
+from allmeca.models.openai import OpenAIChat
 
 
 class MainBot:
     def __init__(self, *, prompt_set, processor, persistence, model="gpt-3.5-turbo"):
         self._persistence = persistence
         self._history = persistence.load()
-        self._chat = ChatOpenAI(model_name=model, temperature=0)
+        self._model = OpenAIChat(model=model, temperature=0)
         self._prompt_set = prompt_set
         if self._history.is_empty():
             self._history.add_many(self._prompt_set.init)
@@ -45,8 +44,7 @@ class MainBot:
         self._persist()
 
     def _get_completion(self):
-        msg = self._chat(self._history.to_langchain(), stop=self._prompt_set.stop_words)
-        return Message.from_langchain(msg)
+        return self._model.generate(self._history, stop=self._prompt_set.stop_words)
 
     def _persist(self):
         self._persistence.save(self._history)

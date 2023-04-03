@@ -34,10 +34,11 @@ class ActionParser:
             # Any remaining text is added to the last action's context
             actions[-1].context += msg[start_pos:]
 
+        log.info("extracted_actions", num=len(actions))
         return actions
 
     def extract_action(self, msg, start_pos):
-        log.debug("extract_action", start_pos=start_pos, msg=msg[start_pos:])
+        log.debug("extract_action", start_pos=start_pos)
         start = self.RE_ACTION_START.search(msg, pos=start_pos)
         if start is None:
             log.debug("no_action_found", start_pos=start_pos)

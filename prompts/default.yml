@@ -1,4 +1,4 @@
-stop_words: null
+stop_words: []
 init:
   - role: system
     sticky: true

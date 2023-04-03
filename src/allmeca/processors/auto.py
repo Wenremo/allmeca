@@ -41,11 +41,11 @@ class AutoProcessor(Processor):
                 if self.confirm_actions:
                     while True:
                         choice = prompt_choice(
-                            f"Perform action: {action.summary()}?",
+                            f"Perform action? {action.summary()}",
                             y="yes",
                             n="no",
                             s="show full action",
-                            c="show full action action",
+                            c="show action context",
                         )
                         if choice == "s":
                             click.echo("The full action is:\n")

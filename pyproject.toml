@@ -17,6 +17,7 @@ pydantic = "^1.10.7"
 tiktoken = "^0.3.3"
 python-box = "^7.0.1"
 structlog = "^22.3.0"
+colorama = "^0.4.6"
 
 [tool.poetry.dev-dependencies]
 
